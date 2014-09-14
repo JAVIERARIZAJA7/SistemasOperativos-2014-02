@@ -1,0 +1,8 @@
+#!/bin/bash
+#Este proceso imprime un mensaje "Mi primer Proceso" recursivamnente al infinito.
+i="0"
+while [$i -lt4]
+do 
+echo "Mi primer proceso"
+done
+

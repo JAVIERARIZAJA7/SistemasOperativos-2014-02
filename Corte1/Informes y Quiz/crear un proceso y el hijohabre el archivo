@@ -1,0 +1,47 @@
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define BLKSIZE 80
+int main(){
+	int i,j,estado;
+	int fdOrigen;
+	int fdDestino;
+	int bytes_read;
+	int vector[10];
+	char buffer[BLKSIZE];
+	char nombre[100];
+	char nombreCopia[100];
+	ssize_t in, out;
+	int borrar;
+
+	printf("\n Nombre del Archivo y extension:\n");
+	gets (nombre);
+
+//Creacion de un proceso Padre e hijo
+
+	if (fork() != 0){
+		printf("Proceso Padre \n");
+		fdOrigen= creat(nombre,0600);	// captura los datos
+		for(i=0;i<10;i++){
+			vector[i]=i;
+
+		}
+		write (fdOrigen,vector,sizeof(vector));
+		printf("\n Archivo Creado\n");	
+		printf("Proceso Hijo \n");
+		//Abrir el primer archivo
+		printf("\n Nombre del Archivo a copiar:\n");
+		gets (nombre);
+		fdOrigen =open(nombre,O_RDWR);
+	 	if (fdOrigen==-1)
+			perror("Error al abrir el fichero");	
+		
+	}
+
+
+	
+
+}	
